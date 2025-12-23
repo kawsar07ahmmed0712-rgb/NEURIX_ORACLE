@@ -112,3 +112,114 @@ def gemini_model_response(user_input):
 greeting()
 
 
+while True:
+    query = takeCommand().lower()
+    print(query)
+
+    if "your name" in query:
+        speak("My name is Jarvis")
+        logging.info("User asked for assistant's name.")
+     
+    elif "My name" in query:
+        speak("My name is Kawsar")
+        logging.info("User asked for own name.")
+
+    elif "time" in query:
+        strTime = datetime.datetime.now().strftime("%H:%M:%S")
+        speak(f"Sir the time is {strTime}")
+        logging.info("User asked for current time.")     
+    
+    # Small talk
+    elif "how are you" in query:
+        speak("I am functioning at full capacity sir!")
+        logging.info("User asked about assistant's well-being.")
+
+    elif "who made you" in query:
+        speak("I was created by Kawsar Ahmmed, a brilliant mind!")
+        logging.info("User asked about assistant's creator.")
+    
+    elif "thank you" in query:
+        speak("It's my pleasure sir. Always happy to help.")
+        logging.info("User expressed gratitude.")
+    
+        
+    elif "open google" in query:
+        speak("ok sir. please type here what do you want to read")
+        webbrowser.open("google.com")
+        logging.info("User requested to open Google.")
+    
+    # Calculator
+    elif "open calculator" in query or "calculator" in query:
+        speak("Opening calculator")
+        subprocess.Popen("calc.exe")
+        logging.info("User requested to open Calculator.")
+    
+    # Notepad
+    elif "open notepad" in query:
+        speak("Opening Notepad")
+        subprocess.Popen("notepad.exe")
+        logging.info("User requested to open Notepad.")
+
+    # Command Prompt
+    elif "open terminal" in query or "open cmd" in query:
+        speak("Opening Command Prompt terminal")
+        subprocess.Popen("cmd.exe")
+        logging.info("User requested to open Command Prompt.")
+
+    # Calendar
+    elif "open calendar" in query or "calendar" in query:
+        speak("Opening Windows Calendar")
+        webbrowser.open("https://calendar.google.com")
+        logging.info("User requested to open Calendar.")
+
+    # YouTube search
+    elif "youtube" in query:
+        speak("Opening YouTube for you.")
+        query = query.replace("youtube", "")
+        webbrowser.open(f"https://www.youtube.com/results?search_query={query}")
+        logging.info("User requested to search on YouTube.")
+
+    elif "open facebook" in query:
+        speak("ok sir. opening facebook")
+        webbrowser.open("facebook.com")
+        logging.info("User requested to open Facebook.")
+
+    elif "open github" in query:
+        speak("ok sir. opening github")
+        webbrowser.open("github.com")
+        logging.info("User requested to open GitHub.")
+
+    # Jokes
+    elif "joke" in query:
+        jokes = [
+            "Why don't programmers like nature? Too many bugs.",
+            "I told my computer I needed a break. It said no problem, it will go to sleep.",
+            "Why do Java developers wear glasses? Because they don't C sharp."
+        ]
+        speak(random.choice(jokes))
+        logging.info("User requested a joke.")
+
+    elif "wikipedia" in query:
+        speak("Searching Wikipedia...")
+        query = query.replace("wikipedia", "")
+        results = wikipedia.summary(query, sentences=2)
+        speak("According to Wikipedia")
+        speak(results)
+        logging.info("User requested information from Wikipedia.")
+
+    # elif "play music" in query or "music" in query:
+    #     play_music()
+
+    elif "exit" in query:
+        speak("Thank you for your time sir. Have a great day ahead!")
+        logging.info("User exited the program.")
+        exit()
+
+    else:
+        response = gemini_model_response(query)
+        speak(response)
+        logging.info("User asked for others question")
+
+
+
+
